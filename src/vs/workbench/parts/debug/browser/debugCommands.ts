@@ -43,6 +43,23 @@ export function registerCommands(): void {
 			}
 		}
 	});
+	KeybindingsRegistry.registerCommandAndKeybindingRule({
+		id: 'debug.disableBreakpoint',
+		weight: KeybindingsRegistry.WEIGHT.workbenchContrib(5),
+		when: ContextKeyExpr.and(CONTEXT_BREAKPOINTS_FOCUSED, InputFocusedContext.toNegated()),
+		primary: KeyCode.Ctrl | KeyCode.Shift | KeyCode.F8,
+		handler: (accessor) => {
+			const listService = accessor.get(IListService);
+			const debugService = accessor.get(IDebugService);
+			const list = listService.lastFocusedList;
+			if (list instanceof List) {
+				const focused = <IEnablement[]>list.getFocusedElements();
+				if (focused && focused.length) {
+					debugService.enableOrDisableBreakpoints(false, focused[0]).done(null, errors.onUnexpectedError);
+				}
+			}
+		}
+	});
 
 	KeybindingsRegistry.registerCommandAndKeybindingRule({
 		id: 'debug.renameWatchExpression',
