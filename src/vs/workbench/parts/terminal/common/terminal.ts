@@ -455,4 +455,6 @@ export interface ITerminalCommandTracker {
 	scrollToNextCommand(): void;
 	selectToPreviousCommand(): void;
 	selectToNextCommand(): void;
+	selectToNextLine(): void;
+	selectToPreviousLine(): void;
 }
