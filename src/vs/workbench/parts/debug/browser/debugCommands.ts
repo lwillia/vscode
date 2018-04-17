@@ -47,7 +47,7 @@ export function registerCommands(): void {
 		id: 'debug.disableBreakpoint',
 		weight: KeybindingsRegistry.WEIGHT.workbenchContrib(5),
 		when: ContextKeyExpr.and(CONTEXT_BREAKPOINTS_FOCUSED, InputFocusedContext.toNegated()),
-		primary: KeyCode.Ctrl | KeyCode.Shift | KeyCode.F8,
+		primary: KeyMod.CtrlCmd | KeyMod.Shift | KeyCode.F9,
 		handler: (accessor) => {
 			const listService = accessor.get(IListService);
 			const debugService = accessor.get(IDebugService);
